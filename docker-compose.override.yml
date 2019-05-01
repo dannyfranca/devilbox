@@ -1,0 +1,53 @@
+# IMPORTANT: The version must match the version of docker-compose.yml
+version: '2.1'
+
+# The following override shows an example for the cockroachdb
+services:
+
+  # ------------------------------------------------------------
+  # PostgreSQL
+  # ------------------------------------------------------------
+  pgsql:
+    volumes:
+      - ${DATABASES_PATH}/pgsql/data:/var/lib/postgresql/data:rw${MOUNT_OPTIONS}
+      - ${DATABASES_PATH}/pgsql/data/pgdata:/var/lib/postgresql/data/pgdata:rw${MOUNT_OPTIONS}
+    depends_on:
+      - mailhog
+
+  # ------------------------------------------------------------
+  # MySQL Database
+  # ------------------------------------------------------------
+  mysql:
+    volumes:
+      - ${DATABASES_PATH}/mariadb:/var/lib/mysql:rw${MOUNT_OPTIONS}
+
+  # ------------------------------------------------------------
+  # MongoDB
+  # ------------------------------------------------------------
+  mongo:
+    volumes:
+      - ${DATABASES_PATH}/mongo/db:/data/db:rw${MOUNT_OPTIONS}
+      - ${DATABASES_PATH}/mongo/config:/data/configdb:rw${MOUNT_OPTIONS}
+
+  # ------------------------------------------------------------
+  # Redis
+  # ------------------------------------------------------------
+  redis:
+    volumes:
+      - ${DATABASES_PATH}/redis/data:/data:rw${MOUNT_OPTIONS}
+
+  # -----------------------------------------------------------------------------------------------
+  # MailHog
+  # -----------------------------------------------------------------------------------------------
+  mailhog:
+    image: mailhog/mailhog:${MAILHOG_SERVER:-latest}
+    hostname: mailhog
+    ports:
+      - "${LOCAL_LISTEN_ADDR}${HOST_PORT_MAILHOG:-8025}:8025"
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.201
+    depends_on:
+      - bind
+      - php
+      - httpd
