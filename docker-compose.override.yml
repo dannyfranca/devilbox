@@ -10,31 +10,31 @@ services:
   pgsql:
     volumes:
       - ${DATABASES_PATH}/pgsql/data:/var/lib/postgresql/data:rw${MOUNT_OPTIONS}
-      - ${DATABASES_PATH}/pgsql/data/pgdata:/var/lib/postgresql/data/pgdata:rw${MOUNT_OPTIONS}
+#      - ${DATABASES_PATH}/pgsql/data/pgdata:/var/lib/postgresql/data/pgdata:rw${MOUNT_OPTIONS}
     depends_on:
       - mailhog
 
   # ------------------------------------------------------------
   # MySQL Database
   # ------------------------------------------------------------
-  mysql:
-    volumes:
-      - ${DATABASES_PATH}/mariadb:/var/lib/mysql:rw${MOUNT_OPTIONS}
+#  mysql:
+#    volumes:
+#      - ${DATABASES_PATH}/mariadb:/var/lib/mysql:rw${MOUNT_OPTIONS}
 
   # ------------------------------------------------------------
   # MongoDB
   # ------------------------------------------------------------
   mongo:
     volumes:
-      - ${DATABASES_PATH}/mongo/db:/data/db:rw${MOUNT_OPTIONS}
+#      - ${DATABASES_PATH}/mongo/db:/data/db:rw${MOUNT_OPTIONS}
       - ${DATABASES_PATH}/mongo/config:/data/configdb:rw${MOUNT_OPTIONS}
 
   # ------------------------------------------------------------
   # Redis
   # ------------------------------------------------------------
-  redis:
-    volumes:
-      - ${DATABASES_PATH}/redis/data:/data:rw${MOUNT_OPTIONS}
+#  redis:
+#    volumes:
+#      - ${DATABASES_PATH}/redis/data:/data:rw${MOUNT_OPTIONS}
 
   # -----------------------------------------------------------------------------------------------
   # MailHog
