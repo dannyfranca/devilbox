@@ -1,0 +1,5 @@
+netstat -ano | findstr :53
+
+- get PID, then:
+
+taskkill /PID 'pid_here' /F

@@ -44,6 +44,7 @@ services:
     hostname: mailhog
     ports:
       - "${LOCAL_LISTEN_ADDR}${HOST_PORT_MAILHOG:-8025}:8025"
+      - "${LOCAL_LISTEN_ADDR}${MAIL_PORT_MAILHOG:-1025}:1025"
     networks:
       app_net:
         ipv4_address: 172.16.238.201

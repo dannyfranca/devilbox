@@ -1,1 +1,1 @@
-docker-compose up -d pgsql
+docker-compose up -d pgsql mysql
